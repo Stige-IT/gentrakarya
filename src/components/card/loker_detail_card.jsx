@@ -13,7 +13,6 @@ import {
   getImageLoker,
   postImageGaleryLoker,
 } from "../../services/image_loker_service";
-import SpinnerDotCircle from "../spinner/spinner_dot_circle";
 import SpinnerWave from "../spinner/spinner_wave";
 
 const LokerDetailCard = ({ loker_id, category }) => {
@@ -146,6 +145,7 @@ const LokerDetailCard = ({ loker_id, category }) => {
       <p className="text-2xl font-semibold text-center uppercase bg-blue-400 py-2">
         {data?.jabatan}
       </p>
+      
       <div className="w-full lg:w-[50%] mx-auto py-5">
         <div className="w-[100%]  aspect-video bg-gray-400 overflow-hidden mx-auto rounded-xl ">
           {data?.profile_lembaga?.image === null ? (

@@ -24,6 +24,14 @@ import DetaiLokerD from './views/dashboard/loker/detail_loker';
 import CreateInfoLoker from './views/dashboard/loker/create_info_loker';
 import MagangD from './views/dashboard/magang';
 import DetailMagangD from './views/dashboard/magang/detail_magang';
+import DetailPelatihan from './views/landing_page/pages/pelatihan/detail_pelatihan';
+import PengaturanD from './views/dashboard/pengaturan';
+import PelatihanD from './views/dashboard/pelatihan';
+import DetailPelatihanD from './views/dashboard/pelatihan/detail_pelatihan';
+import DetailWorkshop from './views/landing_page/pages/workshop/detail_workshop';
+import DetailSertifikasi from './views/landing_page/pages/sertifikasi/detail_sertifikasi';
+import SertifikasiD from './views/dashboard/sertifikasi';
+import DetailSertifikasiD from './views/dashboard/sertifikasi/detail_sertifikasi';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -43,13 +51,13 @@ root.render(
       <Route path="/magang/detail/:magang_id" Component={DetailMagang}></Route>
 
       <Route path="/sertifikasi" Component={Sertifikasi}></Route>
-      {/* <Route path="/sertifikasi/detail/:sertifikasi_id" Component={DetailSertifikasiLP}></Route> */}
+      <Route path="/sertifikasi/detail/:sertifikasi_id" Component={DetailSertifikasi}></Route>
 
       <Route path="/workshop" Component={Workshop}></Route>
-      {/* <Route path="/workshop/detail/:workshop_id" Component={DetailWorkshopLP}></Route> */}
+      <Route path="/workshop/detail/:workshop_id" Component={DetailWorkshop}></Route>
 
       <Route path="/pelatihan" Component={Pelatihan}></Route>
-      {/* <Route path="/pelatihan/detail/:pelatihan_id" Component={DetailPelatihanLP}></Route> */}
+      <Route path="/pelatihan/detail/:pelatihan_id" Component={DetailPelatihan}></Route>
 
       <Route path="/layanan" Component={Layanan}></Route>
 
@@ -59,7 +67,7 @@ root.render(
       {/* Dashboard */}
       <Route path="/dashboard" Component={Dashboard}></Route>
 
-       {/* <Route path="/dashboard/admin" Component={Admin}></Route> */}
+      {/* <Route path="/dashboard/admin" Component={Admin}></Route> */}
 
       {/* <Route path="/dashboard/pengguna" Component={Pengguna}></Route> */}
 
@@ -79,19 +87,20 @@ root.render(
       <Route path="/dashboard/magang/detail/:magang_id" Component={DetailMagangD}></Route>
       {/* <Route path="/dashboard/magang/add" Component={CreateInfoMagang}></Route> */}
 
-      {/* <Route path="/dashboard/sertifikasi" Component={Sertifikasi}></Route>
-      <Route path="/dashboard/sertifikasi/add" Component={CreateInfoSertifikasi}></Route>
-      <Route path="/dashboard/sertifikasi/detail/:sertifikasi_id" Component={DetailSertifikasi}></Route>
+      <Route path="/dashboard/pelatihan" Component={PelatihanD}></Route>
+      <Route path="/dashboard/pelatihan/detail/:pelatihan_id" Component={DetailPelatihanD}></Route>
+      {/* <Route path="/dashboard/pelatihan/add" Component={CreateInfoPelatihan}></Route> */}
 
-      <Route path="/dashboard/workshop" Component={Workshop}></Route>
+      <Route path="/dashboard/sertifikasi" Component={SertifikasiD}></Route>
+      <Route path="/dashboard/sertifikasi/detail/:sertifikasi_id" Component={DetailSertifikasiD}></Route>
+      {/* <Route path="/dashboard/sertifikasi/add" Component={CreateInfoSertifikasi}></Route> */}
+
+      {/*<Route path="/dashboard/workshop" Component={Workshop}></Route>
       <Route path="/dashboard/workshop/add" Component={CreateInfoWorkshop}></Route>
-      <Route path="/dashboard/workshop/detail/:workshop_id" Component={DetailWorkshop}></Route>
+      <Route path="/dashboard/workshop/detail/:workshop_id" Component={DetailWorkshop}></Route>*/}
 
-      <Route path="/dashboard/pelatihan" Component={Pelatihan}></Route>
-      <Route path="/dashboard/pelatihan/add" Component={CreateInfoPelatihan}></Route>
-      <Route path="/dashboard/pelatihan/detail/:pelatihan_id" Component={DetailPelatihan}></Route>
 
-      <Route path="/dashboard/pengaturan" Component={Pengaturan}></Route> */} 
+      <Route path="/dashboard/pengaturan" Component={PengaturanD}></Route>
 
       {/* Error Page */}
       <Route path="/network-error" Component={NetworkError}></Route>

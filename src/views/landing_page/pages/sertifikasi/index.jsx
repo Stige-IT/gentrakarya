@@ -38,158 +38,170 @@ const Sertifikasi = () => {
 
   const [keyword, setKeyword] = useState("");
 
-  const handleProvince = (e) => {
-    const provinceId = e.target.value;
-    setProvinceId(provinceId);
+  const fetchDataProvince = async () => {
+    setProvinceId(0);
+    try {
+      const response = await getProvince();
+      setProvince(response.data.data);
+    } catch (error) {
+      setProvince([]);
+    }
+  };
+  const fetchDataRegency = async (provinceId) => {
+    setRegencyId(0);
+    try {
+      const response = await getRegency(provinceId);
+      setRegency(response.data.data);
+    } catch (error) {
+      setRegency([]);
+    }
+  };
 
-    getRegency(provinceId).then((response) => {
-      if (response && response.status === 200) {
-        setRegency(response.data.data);
-      } else {
-        setRegency([]);
-      }
-      setRegencyId(0);
-
+  const fetchDataDistrict = async (regencyId) => {
+    setDistrictId(0);
+    try {
+      const response = await getDistrict(regencyId);
+      setDistrict(response.data.data);
+    } catch (error) {
       setDistrict([]);
-      setDistrictId(0);
+    }
+  };
 
+  const fetchDataVillage = async (districtId) => {
+    setVillageId(0);
+    try {
+      const response = await getVillage(districtId);
+      setVillage(response.data.data);
+    } catch (error) {
       setVillage([]);
-      setVillageId(0);
-
-      getSertifikasiGeneral(provinceId, regencyId, districtId, villageId).then(
-        (response) => {
-          if (response && response.status === 200) {
-            setData(response.data.data);
-            setTotalData(response.data.meta.total);
-          } else {
-            setData([]);
-            setTotalData(0);
-          }
-        }
-      );
-    });
+    }
   };
 
-  const handleRegency = (e) => {
-    const regencyId = e.target.value;
-    setRegencyId(regencyId);
+  const fetchDataSertifikasi = async (
+    provinceId,
+    regencyId,
+    districtId,
+    villageId,
+    page
+  ) => {
+    setVillageId(0);
+    try {
+      const response = await getSertifikasiGeneral(
+        provinceId,
+        regencyId,
+        districtId,
+        villageId,
+        page
+      );
+      setData(response.data.data);
+      setTotalData(response.data.meta.total);
+      setCurrentPage(response.data.meta.current_page);
+      setLastPage(response.data.meta.last_page);
+    } catch (error) {
+      setData([]);
+      setTotalData(0);
+      setCurrentPage(1);
+      setLastPage(1);
+    }
+    setLoading(false);
+  };
 
-    getDistrict(regencyId).then((response) => {
-      if (response && response.status === 200) {
-        setDistrict(response.data.data);
-      } else {
-        setDistrict([]);
-      }
+  const fetchSearchDataSertifikasi = async (keyword) => {
+    try {
+      const response = await searchSertifikasiGeneral(keyword);
+      setData(response.data.data);
+      setTotalData(response.data.meta.total);
+      setProvinceId(0);
+      setRegencyId(0);
       setDistrictId(0);
-
-      setVillage([]);
       setVillageId(0);
-
-      getSertifikasiGeneral(provinceId, regencyId, districtId, villageId).then(
-        (response) => {
-          if (response && response.status === 200) {
-            setData(response.data.data);
-            setTotalData(response.data.meta.total);
-          } else {
-            setData([]);
-            setTotalData(0);
-          }
-        }
-      );
-    });
-  };
-
-  const handleDistrict = (e) => {
-    const districtId = e.target.value;
-    setDistrictId(districtId);
-
-    getVillage(districtId).then((response) => {
-      if (response && response.status === 200) {
-        setVillage(response.data.data);
-      } else {
-        setVillage([]);
-      }
-      setVillageId(0);
-    });
-
-    getSertifikasiGeneral(provinceId, regencyId, districtId, villageId).then(
-      (response) => {
-        if (response && response.status === 200) {
-          setData(response.data.data);
-          setTotalData(response.data.meta.total);
-        } else {
-          setData([]);
-          setTotalData(0);
-        }
-      }
-    );
-  };
-
-  const handleVillage = (e) => {
-    const vilageId = e.target.value;
-    setVillageId(vilageId);
-
-    getSertifikasiGeneral(provinceId, regencyId, districtId, villageId).then(
-      (response) => {
-        if (response && response.status === 200) {
-          setData(response.data.data);
-          setTotalData(response.data.meta.total);
-        } else {
-          setData([]);
-          setTotalData(0);
-        }
-      }
-    );
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    searchSertifikasiGeneral(keyword).then((response) => {
-      if (response && response.status === 200) {
-        setData(response.data.data);
-        setTotalData(response.data.meta.total);
-        setProvinceId(0);
-        setRegencyId(0);
-        setDistrictId(0);
-        setVillageId(0);
-      } else {
-        setData([]);
-        setTotalData(0);
-      }
-    });
+    } catch (error) {
+      setData([]);
+      setTotalData(0);
+    }
+    setLoading(false)
   };
 
   useEffect(() => {
     setLoading(true);
-    getProvince().then((response) => {
-      if (response && response.status === 200) {
-        setProvince(response.data.data);
-      } else {
-        setProvince([]);
-      }
-      setProvinceId(0);
-    });
 
-    getSertifikasiGeneral(provinceId, regencyId, districtId, villageId).then(
-      (response) => {
-        if (response && response.status === 200) {
-          setData(response.data.data);
-          setTotalData(response.data.meta.total);
-          setCurrentPage(response.data.meta.current_page);
-          setLastPage(response.data.meta.last_page);
-          setLoading(false);
-        } else {
-          setData([]);
-          setTotalData(0);
-          setCurrentPage(1);
-          setLastPage(1);
-          setLoading(false);
-        }
-        setLoading(false);
-      }
+    fetchDataProvince();
+
+    fetchDataSertifikasi(
+      provinceId,
+      regencyId,
+      districtId,
+      villageId,
+      currentPage
     );
     //  elsint-disable-next-line
   }, []);
+
+  const handleProvince = (e) => {
+    setLoading(true);
+    const provinceId = e.target.value;
+    setProvinceId(provinceId);
+
+    fetchDataRegency(provinceId);
+    fetchDataSertifikasi(
+      provinceId,
+      regencyId,
+      districtId,
+      villageId,
+      currentPage
+    );
+  };
+
+  const handleRegency = (e) => {
+    setLoading(true);
+    const regencyId = e.target.value;
+    setRegencyId(regencyId);
+
+    fetchDataDistrict(regencyId);
+    fetchDataSertifikasi(
+      provinceId,
+      regencyId,
+      districtId,
+      villageId,
+      currentPage
+    );
+  };
+
+  const handleDistrict = (e) => {
+    setLoading(true);
+    const districtId = e.target.value;
+    setDistrictId(districtId);
+
+    fetchDataVillage(districtId);
+    fetchDataSertifikasi(
+      provinceId,
+      regencyId,
+      districtId,
+      villageId,
+      currentPage
+    );
+  };
+
+  const handleVillage = (e) => {
+    setLoading(true);
+    const vilageId = e.target.value;
+    setVillageId(vilageId);
+
+    fetchDataSertifikasi(
+      provinceId,
+      regencyId,
+      districtId,
+      villageId,
+      currentPage
+    );
+    setLoading(false);
+  };
+
+  const handleSearch = (e) => {
+    setLoading(true)
+    e.preventDefault();
+    fetchSearchDataSertifikasi(keyword)
+  };
   return (
     <>
       <Helmet>

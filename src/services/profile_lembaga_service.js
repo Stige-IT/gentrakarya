@@ -12,7 +12,7 @@ export const getProfileLembaga = async (accessToken) => {
 
         return response
     } catch (error) {
-        console.error('Error fetching data:', error);
+        return error.response
     }
 };
 
@@ -35,7 +35,7 @@ export const updateProfileLembaga = async (accessToken, lembaga_id, nama_lembaga
 
         return response
     } catch (error) {
-        console.error('Error fetching data:', error);
+        return error.response
     }
 };
 
@@ -53,6 +53,6 @@ export const updateFotoProfileLembaga = async (accessToken, image) => {
 
         return response
     } catch (error) {
-        console.error('Error fetching data:', error);
+        return error.response
     }
 };

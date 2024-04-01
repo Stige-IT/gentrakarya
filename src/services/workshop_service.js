@@ -12,7 +12,6 @@ export const getWorkshopGeneral = async (province_id, regency_id, district_id, v
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -27,7 +26,6 @@ export const getWorkshopGeneralSample = async () => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -42,7 +40,6 @@ export const searchWorkshopGeneral = async (keyword) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 export const getWorkshop = async (accessToken) => {
@@ -57,7 +54,6 @@ export const getWorkshop = async (accessToken) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -73,7 +69,6 @@ export const showWorkshopGeneral = async (WorkshopId) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -89,7 +84,6 @@ export const showWorkshop = async (accessToken, WorkshopId) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -140,6 +134,5 @@ export const postWorkshop = async (
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };

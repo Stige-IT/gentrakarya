@@ -1,8 +1,8 @@
 import apiService from "./api_service"
 
-export const getImagePelatihan = async (pelatihanId) => {
+export const getImageWorkshop = async (workshopId) => {
     try {
-        const response = apiService.get(`image/pelatihan/${encodeURIComponent(pelatihanId)}`, {
+        const response = apiService.get(`image/workshop/${encodeURIComponent(workshopId)}`, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -10,18 +10,17 @@ export const getImagePelatihan = async (pelatihanId) => {
         return response
     } catch (error) {
         return error.response
-        
     }
 }
 
-export const postImageGaleryPelatihan = async (accessToken, pelatihanId, images) => {
+export const postImageGaleryWorkshop = async (accessToken, workshopId, images) => {
     try {
         const formData = new FormData();
         for (const image of images) {
             formData.append('images[]', image);
         }
 
-        const response = await apiService.post(`lembaga/image/pelatihan/${encodeURIComponent(pelatihanId)}/create`, formData, {
+        const response = await apiService.post(`lembaga/image/workshop/${encodeURIComponent(workshopId)}/create`, formData, {
             headers: {
                 Authorization: accessToken,
                 'Content-Type': 'multipart/form-data',
@@ -30,13 +29,12 @@ export const postImageGaleryPelatihan = async (accessToken, pelatihanId, images)
         return response
     } catch (error) {
         return error.response
-        
     }
 };
 
-export const deleteImageGaleryPelatihan = async (accessToken, imageId) => {
+export const deleteImageGaleryWorkshop = async (accessToken, imageId) => {
     try {
-        const response = await apiService.post(`lembaga/image/pelatihan/delete/${encodeURIComponent(imageId)}`, {}, {
+        const response = await apiService.post(`lembaga/image/workshop/delete/${encodeURIComponent(imageId)}`, {}, {
             headers: {
                 Authorization: accessToken,
                 'Content-Type': 'application/json'
@@ -45,6 +43,5 @@ export const deleteImageGaleryPelatihan = async (accessToken, imageId) => {
         return response
     } catch (error) {
         return error.response
-        
     }
 };

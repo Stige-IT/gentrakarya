@@ -21,7 +21,6 @@ const CustomLinkSidebar = ({link, name, icon}) => {
             : "w-0"
         } h-full bg-white right-0 rounded-md md:rounded-l-full`}
       ></div>
-      {name}
     </Link>
   );
 };

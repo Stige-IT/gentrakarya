@@ -1,18 +1,23 @@
-import { useEffect } from "react";
-import { BaseURL } from "../../services/base_url";
-import { showMagangGeneral } from "../../services/magang_service";
-import TemplateText from "../template_text";
 import { useState } from "react";
-import FormatDateTime from "../format_datetime";
+import { showPelatihanGeneral } from "../../services/pelatihan_service";
 import FormatDate from "../format_date";
+import FormatDateTime from "../format_datetime";
+import TemplateText from "../template_text";
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { getImageMagang } from "../../services/image_magang_service";
+import { BaseURL } from "../../services/base_url";
+import {
+  deleteImageGaleryPelatihan,
+  getImagePelatihan,
+  postImageGaleryPelatihan,
+} from "../../services/image_pelatihan_service";
 import SpinnerWave from "../spinner/spinner_wave";
+import { useHref} from "react-router-dom";
 
-const MagangDetailCard = ({ magang_id, category }) => {
-  // const [selectedImage, setSelectedImage] = useState(null);
-  // const [accessToken, setAccessToken] = useState("");
+const PelatihanDetailCard = ({ pelatihan_id, category }) => {
+  const path = useHref();
+  const [accessToken, setAccessToken] = useState(null);
   const [data, setData] = useState([]);
   const [imageGalery, setImageGalery] = useState([]);
 
@@ -25,79 +30,42 @@ const MagangDetailCard = ({ magang_id, category }) => {
   const [images, setImages] = useState([]);
 
   const addListClass = (htmlContent) => {
-    // Menambahkan class list-decimal pada elemen <ol>
+    // Menambahkan class list-decimal pada elemen <ol>s
     return htmlContent.replace(/<ol>/g, '<ol class="list-decimal pl-16">');
   };
 
-  const fetchDataMagang = async () => {
+  const fechDataPelatihan = async () => {
     try {
-      const response = await showMagangGeneral(magang_id);
+      const response = await showPelatihanGeneral(pelatihan_id);
       setData(response.data.data);
     } catch (error) {
-      setData([]);
+      setData();
     }
   };
 
   const fetchDataImage = async () => {
     try {
-      const response = await getImageMagang(magang_id);
+      const response = await getImagePelatihan(pelatihan_id);
       setImageGalery(response.data.data);
     } catch (error) {
       setImageGalery([]);
     }
   };
 
-  // const handleLamaran = () => {
-  //   // const now = new Date();
-  //   // const formattedDateTime = FormatDate(now);
-  //   // setCurrentDateTime(formattedDateTime);
-  //   // if (data?.expired_at > currentDateTime) {
-  //   //   alert(
-  //   //     "Lowongan Sudah Kedaluarsa..! Silahkan Cari Lowongan kerja lainnya"
-  //   //   );
-  //   // } else {
-  //   //   if (data?.lamaran === data?.kuota_lowongan) {
-  //   //     alert("Lowongan Sudah Penuh..! Silahkan Cari Lowongan kerja lainnya");
-  //   //   } else {
-  //   //     if (accessToken === "" || accessToken === null) {
-  //   //       navigate("/login");
-  //   //     } else {
-  //   //       navigate(`/loker/${loker_id}/pengajuan/lamaran`);
-  //   //     }
-  //   //   }
-  //   // }
-  // };
-
   useEffect(() => {
-    fetchDataMagang();
-
+    if (path.startsWith("/dashboard")) {
+      const newAccessToken = localStorage.getItem("access_token");
+      if (newAccessToken === null || newAccessToken === "") {
+        setAccessToken(null);
+      } else {
+        setAccessToken(`Bearer ${newAccessToken}`);
+      }
+    }
+    fechDataPelatihan();
     fetchDataImage();
-  }, [magang_id]);
 
-  const handleLamaran = () => {
-    // const now = new Date();
-    // const formattedDateTime = formatDate(now);
-    // setCurrentDateTime(formattedDateTime);
-    // if (data?.expired_at > currentDateTime) {
-    //   setMessageConfirm(
-    //     "Lowongan Kerja Sudah kedaluarsa, Silahkan cari lowongan lain..!"
-    //   );
-    //   setChecked(true);
-    // } else {
-    //   if (data?.lamaran === data?.kuota_lowongan) {
-    //     setMessageConfirm(
-    //       "Lowongan Kerja Sudah penuh, Silahkan cari lowongan lain..!"
-    //     );
-    //     setChecked(true);
-    //   } else {
-    //     if (accessToken === "" || accessToken === null) {
-    //       navigate("/login");
-    //     } else {
-    //       navigate(`/loker/${loker_id}/pengajuan/lamaran`);
-    //     }
-    //   }
-    // }
-  };
+    // eslint-disable-next-line
+  }, [pelatihan_id, path]);
 
   const handleImageChange = (e) => {
     const selectedFiles = e.target.files;
@@ -107,49 +75,38 @@ const MagangDetailCard = ({ magang_id, category }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // try {
-    //   await postImageGaleryLoker(accessToken, loker_id, images);
-    //   fetchDataImage();
-    //   setLoading(false);
-    //   setOpenModalAddGalery(false);
-    //   setImages([]);
-    // } catch (error) {
-    //   setLoading(false);
-    //   setOpenModalAddGalery(false);
-    //   setImages([]);
-    //   alert("gagal menyimpan data");
-    // }
+    try {
+      await postImageGaleryPelatihan(accessToken, pelatihan_id, images);
+      fetchDataImage();
+      setLoading(false);
+      setOpenModalAddGalery(false);
+      setImages([]);
+    } catch (error) {
+      setLoading(false);
+      setOpenModalAddGalery(false);
+      setImages([]);
+      alert("gagal menyimpan data");
+    }
   };
 
   const handleDeleteImage = async (e, imageId) => {
     e.preventDefault();
     setLoading(true);
-    // try {
-    //   await deleteImageGaleryLoker(accessToken, imageId);
-    //   fetchDataImage();
-    //   setLoading(false);
-    // } catch (error) {
-    //   setLoading(false);
-    //   alert("Gagal menghapus..!");
-    // }
-  };
-
-  const formatDate = (date) => {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    const seconds = String(date.getSeconds()).padStart(2, "0");
-    return `${day}/${month}/${year}, ${hours}.${minutes}.${seconds} WIB`;
+    try {
+      await deleteImageGaleryPelatihan(accessToken, imageId);
+      fetchDataImage();
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      alert("Gagal menghapus..!");
+    }
   };
 
   return (
     <div className="w-full px-3 md:px-5 lg:px-10 py-5">
-      <p className="text-2xl font-semibold text-center uppercase bg-blue-400 py-2">
-        {data?.jabatan}
+      <p className="text-2xl font-semibold text-center uppercase bg-blue-300 py-2">
+        {data?.judul_pelatihan}
       </p>
-
       <div className="w-full lg:w-[50%] mx-auto py-5">
         <div className="w-[100%]  aspect-video bg-gray-400 overflow-hidden mx-auto rounded-xl ">
           {data?.profile_lembaga?.image === null ? (
@@ -176,57 +133,13 @@ const MagangDetailCard = ({ magang_id, category }) => {
               <FormatDate date={data?.expired_at}></FormatDate>
             </span>
           </p>
-          {category === "dashboard-lembaga" ? (
-            <button
-              type="button"
-              onClick={handleLamaran}
-              className="px-5 py-1 rounded-md bg-yellow-300 font-semibold mt-3"
-            >
-              Ajukan Lamaran
-            </button>
-          ) : (
-            ""
-          )}
-          <div className="flex items-center space-x-3 mt-3">
-            <p>Kuota Lowongan : </p>
-            <p className="text-xl font-semibold">
-              {data?.kuota_lowongan - data?.lamaran} dari {data?.kuota_lowongan}
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* <p className="text-2xl font-semibold text-center uppercase bg-blue-300 py-2">
-        {data?.jabatan}
-      </p>
-      <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between mb-5 my-3">
-        <p className="space-x-2 flex items-center">
-          <span className="font-semibold">Dibuat pada :</span>
-          <span>
-            <FormatDateTime dateTime={data?.created_at}></FormatDateTime>
-          </span>
-        </p>
-
-        <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between mb-5 my-3">
-          <p className="space-x-2 flex items-center">
-            <span className="font-semibold">Berakhir pada :</span>
-            <span>
-              <FormatDate date={data?.expired_at}></FormatDate>
-            </span>
-          </p>
-          <div className=" flex justify-center mt-5">
-            <button
-              type="button"
-              className="px-3 py-2 rounded-md text-center bg-custom-yellow font-semibold hover:bg-yellow-400 transition-colors mx-auto"
-            >
-              Ajukan Lamaran Magang
-            </button>
-          </div>
-        </div>
-      </div> */}
-
-      <div className="w-full flex flex-col lg:flex-row space-x-3">
+      <div className="w-full flex flex-col lg:flex-row lg:space-x-3 space-y-3 lg:space-y-0">
+        {/* Left Content */}
         <div className="w-full lg:w-[65%] space-y-3 md:space-y-0">
+          
           <TemplateText
             name="Nama Peusahaan"
             value={data?.profile_lembaga?.nama_lembaga}
@@ -235,26 +148,24 @@ const MagangDetailCard = ({ magang_id, category }) => {
             name="Lembaga"
             value={data?.profile_lembaga?.lembaga?.name}
           />
-          <TemplateText name="Posisi / Jabatan" value={data?.jabatan} />
+          <TemplateText name="Judul Pelatihan" value={data?.judul_pelatihan} />
+          <TemplateText name="Biaya Pelatihan" value={data?.biaya_pelatihan} />
+          <TemplateText name="Metoda Pelatihan" value={data?.metoda} />
           <TemplateText
-            name="Jenis Kelamin Yang dibutuhkan"
-            value={data?.jenis_kelamin}
-          />
-          <TemplateText name="Rentang Gaji" value={data?.gaji_minimal} />
-          <TemplateText
-            name="Jenjang Pendidikan / Jurusan"
-            value="PT CHANGSIN REKSADA"
-          />
-          <TemplateText name="Rentang Usia" value={data?.rentang_usia} />
-          <TemplateText
-            name="Status Pelamar Yang dibutuhkan"
-            value={data?.status}
+            name="Tanggal Pelaksanaan"
+            value={
+              <FormatDateTime
+                dateTime={data?.tanggal_pelaksanaan}
+              ></FormatDateTime>
+            }
           />
           <TemplateText name="No Telepon / Wa" value={data?.no_telepon} />
           <TemplateText name="Email" value={data?.email} />
         </div>
 
-        <div className="w-full lg:w-[35%]">
+        {/* Right Content */}
+        <div className="w-full lg:w-[35%] space-y-3 lg:space-y-0">
+          
           <TemplateText
             width="w-32"
             name="Provinsi"
@@ -279,21 +190,20 @@ const MagangDetailCard = ({ magang_id, category }) => {
             href="https://maps.app.goo.gl/nHfid9j8pW5rg1VF8"
             target="_blank"
             rel="noreferrer"
-            className="text-custom-yellow flex items-center"
+            className="text-blue-500 hover:text-blue-600 transition-colors flex items-center space-x-3 py-3"
           >
             <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon>
             <p>Klik Link Map</p>
           </a>
-          {/* <TemplateText width="w-32" name="Map" value="PT CHANGSIN REKSADA"></TemplateText> */}
           <div>
-            <p>Detail Alamat</p>
+            <p>Detail Alamat :</p>
             <p>{data?.address?.detail}</p>
           </div>
         </div>
       </div>
       <div className="w-full mt-5">
         <p className="border-b-2 font-semibold">Detail Magang :</p>
-        <div dangerouslySetInnerHTML={{ __html: data?.detail }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.deskripsi }} />
       </div>
 
       {imageGalery.length === 0 && category !== "lembaga" ? (
@@ -307,7 +217,7 @@ const MagangDetailCard = ({ magang_id, category }) => {
                 {/* Modal Add Galery */}
                 <button
                   onClick={() => setOpenModalAddGalery(true)}
-                  className="px-3 py-2 bg-custom-blue rounded-md flex items-center font-semibold space-x-3 "
+                  className="px-3 py-2 bg-custom-yellow rounded-md flex items-center font-semibold space-x-3 "
                 >
                   <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                   <p>Tambah Galery</p>
@@ -440,4 +350,4 @@ const MagangDetailCard = ({ magang_id, category }) => {
   );
 };
 
-export default MagangDetailCard;
+export default PelatihanDetailCard;

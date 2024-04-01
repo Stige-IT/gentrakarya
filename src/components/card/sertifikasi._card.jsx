@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/images/Logo.svg'
 import LogoGentra from '../../assets/images/LogoGentra.png'
 import FormatDateTime from '../format_datetime'
@@ -56,9 +57,9 @@ const SertifikasiCard = ({ link, tanggalPelaksanaan, posisi, namaPerusahaan, lem
             </div>
             <div className='text-sm border-t-2 border-black mt-2 flex items-center justify-between pt-2'>
                 <p className='text-end mb-2'>Sertifikasi</p>
-                <a href={link} className='px-3 py-2 text-sm bg-custom-yellow rounded-md left-0 text-center font-medium'>
+                <Link to={link} className='px-3 py-2 text-sm bg-custom-yellow rounded-md left-0 text-center font-medium'>
                     Lihat Detail
-                </a>
+                </Link>
             </div>
         </div>
     )

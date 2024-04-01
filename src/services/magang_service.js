@@ -12,7 +12,6 @@ export const getMagangGeneral = async (province_id, regency_id, district_id, vil
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -27,7 +26,6 @@ export const getMagangGeneralSample = async () => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -42,7 +40,6 @@ export const searchMagangGeneral = async (keyword) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -59,7 +56,6 @@ export const showMagangGeneral = async (magangId) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -74,8 +70,7 @@ export const getMagang = async (accessToken) => {
 
         return response
     } catch (error) {
-        return error.response
-        console.error('Error fetching data:', error);
+        return error.respons
     }
 };
 export const showMagang = async (accessToken, magangId) => {
@@ -90,7 +85,6 @@ export const showMagang = async (accessToken, magangId) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -149,6 +143,5 @@ export const postMagang = async (
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
