@@ -122,7 +122,7 @@ const CreateInfoMagang = () => {
 
       fetchDataProvince();
       fetchDataRegency(provinceId);
-            fetchDataDistrict(regencyId);
+      fetchDataDistrict(regencyId);
       fetchDataVillage(districtId);
     }
     // eslint-disable-next-line

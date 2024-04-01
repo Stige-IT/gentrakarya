@@ -106,7 +106,6 @@ const Dashboard = () => {
           </div>
         </Header>
         {viewDashboard}
-
       </Layout>
     </>
   );
