@@ -134,7 +134,13 @@ const SidebarLembaga = () => {
             ""
           )}
 
-          <div className="w-full rounded-l-md">
+          <CustomLinkSidebar
+            link="/dashboard/magang"
+            name="Data Magang"
+            icon={faDashboard}
+          />
+
+          {/* <div className="w-full rounded-l-md">
             <button
               type="button"
               onClick={handleCollapseMagang}
@@ -186,7 +192,7 @@ const SidebarLembaga = () => {
                 icon={faDashboard}
               />
             </div>
-          </div>
+          </div> */}
 
           {subCategory === "LKP" ||
           subCategory === "LPK" ||
@@ -239,14 +245,14 @@ const SidebarLembaga = () => {
             <div className={`absolute ${name === 'Dashboard' ? path === '/dashboard' ? 'w-full' : 'w-0' : path.startsWith(link) ? 'w-full' : 'w-0'} h-full bg-white right-0 rounded-md md:rounded-l-full`}></div>
         </Link> */}
         </div>
-        <button
+        {/* <button
           type="button"
           onClick={handleLogout}
           className="w-full bg-red-500 text-white font-semibold flex items-center justify-center space-x-3 hover:bg-red-600 transition-colors py-2"
         >
           <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
           <p>Logout</p>
-        </button>
+        </button> */}
       </div>
 
       {/* Mobile Menu */}
@@ -333,7 +339,7 @@ const SidebarLembaga = () => {
             link="/dashboard/pelatihan"
             name="Pelatihan"
             icon={faDashboard}
-         />
+          />
         ) : (
           ""
         )}

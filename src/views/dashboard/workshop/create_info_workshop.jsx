@@ -1,23 +1,16 @@
 import { Helmet } from "react-helmet"
-import Layout from "../../../components/dashboard_component/layout"
-import Header from "../../../components/dashboard_component/header"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faSave } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { getDistrict, getProvince, getRegency, getVillage } from "../../../services/location_service"
 import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css'
-import TemplateInput from "../../../components/template_input"
 import TemplateInputV2 from "../../../components/template_input_v2"
 import { useNavigate } from "react-router-dom"
 import { getProfileLembaga } from "../../../services/profile_lembaga_service"
-import { postMagang } from "../../../services/magang_service"
-import {
-    Datepicker,
-    Input,
-    initTE,
-} from "tw-elements";
 import { postWorkshop } from "../../../services/workshop_service"
+import Layout from "../../../components/layout"
+import Header from "../../../components/header"
 
 const CreateInfoWorkshop = () => {
 
@@ -57,68 +50,115 @@ const CreateInfoWorkshop = () => {
 
     const [loading, setLoading] = useState(false)
 
+    const fetchDataProfileLembaga = async (accessToken) => {
+        try {
+          const response = await getProfileLembaga(accessToken);
+          setProfileLembaga(response.data.data);
+          setEmail(response.data?.data?.email ?? "");
+          setNoTelepon(response.data?.data?.no_telepon ?? "");
+    
+          setProvinceId(response.data?.data?.address?.province?.id ?? 0);
+          setRegencyId(response.data?.data?.address?.regency?.id ?? 0);
+          setDistrictId(response.data?.data?.address?.district?.id ?? 0);
+          setVillageId(response.data?.data?.address?.village?.id ?? 0);
+          setMap(response.data?.data?.address?.map ?? "");
+          setDetail(response.data?.data?.address?.detail ?? "");
+        } catch (error) {
+          setProfileLembaga(null);
+        }
+      };
+    
+      const fetchDataProvince = async () => {
+        try {
+          const response = await getProvince();
+          setProvince(response.data.data);
+        } catch (error) {
+          setProvince([]);
+        }
+      };
+    
+      const fetchDataRegency = async (provinceId) => {
+        try {
+          const response = await getRegency(provinceId);
+          setRegency(response.data.data);
+        } catch (error) {
+          setRegency([]);
+        }
+      };
+    
+      const fetchDataDistrict = async (regencyId) => {
+        try {
+          const response = await getDistrict(regencyId);
+          setDistrict(response.data.data);
+        } catch (error) {
+          setDistrict([]);
+        }
+      };
+    
+      const fetchDataVillage = async (districtId) => {
+        try {
+          const response = await getVillage(districtId);
+          setVillage(response.data.data);
+        } catch (error) {
+          setVillage([]);
+        }
+      };
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('access_token')
+        if (accessToken === null || accessToken === '') {
+            navigate('/login')
+        } else {
+            fetchDataProfileLembaga(`Bearer ${accessToken}`);
+
+            fetchDataProvince();
+            fetchDataRegency(provinceId);
+            fetchDataDistrict(regencyId);
+            fetchDataVillage(districtId);
+        }
+    }, [])
 
     const handleProvince = (e) => {
-        const provinceId = e.target.value
-        setProvinceId(provinceId)
+        const provinceId = e.target.value;
+        setProvinceId(provinceId);
+    
+        setRegencyId(0);
+    
+        setDistrict([]);
+        setDistrictId(0);
+    
+        setVillage([]);
+        setVillageId(0);
+    
+        fetchDataRegency(provinceId);
+      };
+    
+      const handleRegency = (e) => {
+        const regencyId = e.target.value;
+        setRegencyId(regencyId);
+    
+        setDistrictId(0);
+        setVillage([]);
+        setVillageId(0);
+    
+        fetchDataDistrict(regencyId);
+      };
+    
+      const handleDistrict = (e) => {
+        const districtId = e.target.value;
+        setDistrictId(districtId);
+    
+        setVillageId(0);
+    
+        fetchDataVillage(districtId);
+      };
+    
+      const handleVillage = (e) => {
+        const villageId = e.target.value;
+        setVillageId(villageId);
+      };
 
-        setRegencyId(0)
-
-        setDistrict([])
-        setDistrictId(0)
-
-        setVillage([])
-        setVillageId(0)
-
-        getRegency(provinceId).then((response) => {
-            if (response && response.status == 200) {
-                setRegency(response.data.data)
-            } else {
-                setRegency([])
-            }
-        })
-
-    }
-
-    const handleRegency = (e) => {
-        const regencyId = e.target.value
-        setRegencyId(regencyId)
-
-        setDistrictId(0)
-        setVillage([])
-        setVillageId(0)
-
-        getDistrict(regencyId).then((response) => {
-            if (response && response.status == 200) {
-                setDistrict(response.data.data)
-            } else {
-                setDistrict([])
-            }
-        })
-
-    }
-    const handleDistrict = (e) => {
-        const districtId = e.target.value
-        setDistrictId(districtId)
-
-        setVillageId(0)
-
-        getVillage(districtId).then((response) => {
-            if (response && response.status == 200) {
-                setVillage(response.data.data)
-            } else {
-                setVillage([])
-            }
-        })
-
-
-    }
-    const handleVillage = (e) => {
-        const villageId = e.target.value
-        setVillageId(villageId)
-    }
-
-    const handleSubmit = (e) => {
+      const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
 
@@ -153,35 +193,6 @@ const CreateInfoWorkshop = () => {
             setLoading(false);
         }
     }
-
-    useEffect(() => {
-        const accessToken = `Bearer ${localStorage.getItem('access_token')}`
-        setAccessToken(accessToken)
-        if (accessToken === null || accessToken === '') {
-            navigate('/login')
-        } else {
-            getProfileLembaga(accessToken).then((response) => {
-                if (response && response.status === 200) {
-                    setProfileLembaga(response.data.data)
-                    setEmail(response.data?.data?.email ?? '')
-                    setNoTelepon(response.data?.data?.no_telepon ?? '')
-                } else {
-                    setProfileLembaga(null)
-                }
-            })
-
-            getProvince().then((response) => {
-                if (response && response.status == 200) {
-                    setProvince(response.data.data)
-                } else {
-                    setProvince([])
-                    setProvinceId(0)
-                }
-            })
-
-            initTE({ Datepicker, Input });
-        }
-    }, [])
     return (
         <>
             <Helmet>

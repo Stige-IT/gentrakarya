@@ -1,14 +1,9 @@
 import { Helmet } from "react-helmet"
-import Layout from "../../../components/dashboard_component/layout"
-import Header from "../../../components/dashboard_component/header"
-import MyCarousel from "../../landing_page/sections/my_carousel"
 import { useEffect, useState } from "react"
 import { deleteImageSlider, getImageslider, postImageSlider } from "../../../services/image_slider_service"
-import {
-    Modal,
-    Ripple,
-    initTE,
-} from "tw-elements";
+import Layout from "../../../components/layout"
+import Header from "../../../components/header"
+import MyCarousel from "../../landing_page/sections/carousel"
 
 const SlideShow = () => {
 
@@ -75,8 +70,6 @@ const SlideShow = () => {
                 setData([])
             }
         })
-
-        initTE({ Modal, Ripple });
     }, [])
 
     return (

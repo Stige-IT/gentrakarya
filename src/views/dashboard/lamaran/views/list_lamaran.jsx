@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet"
-import Header from "../../../../components/dashboard_component/header"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-import Layout from "../../../../components/dashboard_component/layout"
 import { getLamaranMasyarakat } from "../../../../services/lamaran_service"
+import Layout from "../../../../components/layout"
+import Header from "../../../../components/header"
 
 const ListLamaranMasyarakat = () => {
     let [number, setNumber] = useState(1)

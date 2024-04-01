@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import SertifikasiLoadingCard from "../../../components/card/sertifikasi_loading_card";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SertifikasiD = () => {
   const navigate = useNavigate();
@@ -54,13 +54,13 @@ const SertifikasiD = () => {
               ({totalData} Sertifikasi)
             </span>
           </p>
-          <a
-            href="/dashboard/sertifikasi/add"
+          <Link
+            to="/dashboard/sertifikasi/add"
             className="flex items-center space-x-3 bg-blue-500 hover:bg-blue-600 transition-colors rounded-md px-3 py-2 text-white"
           >
             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-            <p className="hidden md:blok">Tambah Info Sertifikasi</p>
-          </a>
+            <p className="hidden md:block">Tambah Info Sertifikasi</p>
+          </Link>
         </Header>
         <div className="w-full grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-3 py-3 px-3 md:px-5 lg:px-10">
           {loading === true ? (

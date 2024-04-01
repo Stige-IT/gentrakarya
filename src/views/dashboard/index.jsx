@@ -107,60 +107,6 @@ const Dashboard = () => {
         </Header>
         {viewDashboard}
 
-        <label
-          className="btn btn-primary"
-          onClick={handleShowModal}
-          htmlFor="modal-1"
-        >
-          Open Modal
-        </label>
-        <input
-          className="modal-state"
-          id="modal-1"
-          checked={showModal}
-          type="checkbox"
-        />
-        <div className="modal">
-          <label className="modal-overlay" htmlFor="modal-1"></label>
-          <div className="modal-content flex flex-col gap-5">
-            <label
-              htmlFor="modal-1"
-              onClick={handleShowModal}
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            >
-              ✕
-            </label>
-            <h2 className="text-xl">Modal title 1</h2>
-            <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-              dolorum voluptate ratione dicta. Maxime cupiditate, est commodi
-              consectetur earum iure, optio, obcaecati in nulla saepe maiores
-              nobis iste quasi alias!
-            </span>
-            <div className="flex gap-3">
-              <button className="btn btn-error btn-block">Delete</button>
-
-              <label for="modal-1" className="btn btn-block">
-                Cancel
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <ol className="steps">
-          <li className="step overflow-hidden">
-            <div className="step-circle">1</div>
-            <h3>Done</h3>
-          </li>
-          <li className="step overflow-hidden">
-            <div className="step-circle">2</div>
-            <h3>In progress</h3>
-          </li>
-          <li className="step overflow-hidden">
-            <div className="step-circle">3</div>
-            <h3>Waiting</h3>
-          </li>
-        </ol>
       </Layout>
     </>
   );

@@ -1,10 +1,9 @@
 import { Helmet } from "react-helmet"
-import Layout from "../../../../components/dashboard_component/layout"
-import Header from "../../../../components/dashboard_component/header"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getLamaranLembaga } from "../../../../services/lamaran_service"
-import { hover } from "@testing-library/user-event/dist/hover"
+import Layout from "../../../../components/layout"
+import Header from "../../../../components/header"
 
 
 const ListLamaranLembaga = () => {

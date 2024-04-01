@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet"
-import Header from "../../../components/dashboard_component/header"
-import Layout from "../../../components/dashboard_component/layout"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom"
+import Header from "../../../components/header"
+import Layout from "../../../components/layout"
 
-const DetailLamaran = () => {
+const DetailLamaranD = () => {
     return (
         <>
             <Helmet>
@@ -25,4 +25,4 @@ const DetailLamaran = () => {
     )
 }
 
-export default DetailLamaran
+export default DetailLamaranD

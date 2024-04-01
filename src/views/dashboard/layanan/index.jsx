@@ -1,12 +1,4 @@
 import { Helmet } from "react-helmet"
-import Header from "../../../components/dashboard_component/header"
-import Layout from "../../../components/dashboard_component/layout"
-import {
-    Collapse,
-    Modal,
-    Ripple,
-    initTE,
-} from "tw-elements";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -14,9 +6,11 @@ import { deleteLayanan, getLayanan, postLayanan } from "../../../services/layana
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css'
 import TemplateInput from "../../../components/template_input";
+import Header from "../../../components/header";
+import Layout from "../../../components/layout";
 
 
-const Layanan = () => {
+const LayananD = () => {
 
     const [open, setOpen] = useState(false)
     const [accessToken, setAccessToken] = useState('')
@@ -98,7 +92,6 @@ const Layanan = () => {
             }
         })
 
-        initTE({ Collapse, Modal, Ripple, });
     }, [])
     return (
         <>
@@ -204,4 +197,4 @@ const Layanan = () => {
 
 }
 
-export default Layanan
+export default LayananD

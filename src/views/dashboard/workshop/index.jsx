@@ -1,6 +1,6 @@
 import ViewWorkshopLembaga from "./views/views_workshop_lembaga"
 
-const Workshop = () => {
+const WorkshopD = () => {
     let  view = <ViewWorkshopLembaga></ViewWorkshopLembaga>
     return (
         <>
@@ -9,4 +9,4 @@ const Workshop = () => {
     )
 }
 
-export default Workshop
+export default WorkshopD

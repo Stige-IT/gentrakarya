@@ -1,13 +1,9 @@
 import { Helmet } from "react-helmet"
-import Layout from "../../../components/dashboard_component/layout"
-import Header from "../../../components/dashboard_component/header"
 import { useEffect, useState } from "react"
 import { deleteImageGalery, getImagGalery, postImageGalery } from "../../../services/mage_galery"
-import {
-    Modal,
-    Ripple,
-    initTE,
-  } from "tw-elements";
+import Header from "../../../components/header";
+import Layout from "../../../components/layout";
+import { BaseURL } from "../../../services/base_url";
 
 const Galery = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -68,7 +64,6 @@ const Galery = () => {
             }
         })
 
-        initTE({ Modal, Ripple });
     }, [])
 
     return (
@@ -91,7 +86,7 @@ const Galery = () => {
                 <div className="grid grid-cols-3 gap-5 p-5">
                     {data?.map((item) => (
                         <div className="relative group">
-                            <img src={`http://127.0.0.1:8000/${item.image}`} alt="sdsadsd" className="bg-red-300 w-full aspect-video rounded-xl transition-all duration-700 object-cover" />
+                            <img src={`${BaseURL}${item.image}`} alt="sdsadsd" className="bg-red-300 w-full aspect-video rounded-xl transition-all duration-700 object-cover" />
                             <button type="button" onClick={() => handleDeleteImage(item.id)} className="absolute bottom-0 bg-red-500 w-full h-0 text-white group-hover:h-12 transition-all duration-300 font-semibold">
                                 Hapus
                             </button>

@@ -32,6 +32,19 @@ import DetailWorkshop from './views/landing_page/pages/workshop/detail_workshop'
 import DetailSertifikasi from './views/landing_page/pages/sertifikasi/detail_sertifikasi';
 import SertifikasiD from './views/dashboard/sertifikasi';
 import DetailSertifikasiD from './views/dashboard/sertifikasi/detail_sertifikasi';
+import CreateInfoMagang from './views/dashboard/magang/create_info_magang';
+import CreateInfoSertifikasi from './views/dashboard/sertifikasi/create_info_sertifikasi';
+import CreateInfoPelatihan from './views/dashboard/pelatihan/create_info_pelatihan';
+import WorkshopD from './views/dashboard/workshop';
+import DetailWorkshopD from './views/dashboard/workshop/detail_workshop';
+import CreateInfoWorkshop from './views/dashboard/workshop/create_info_workshop';
+import LamaranD from './views/dashboard/lamaran';
+import DetailLamaranD from './views/dashboard/lamaran/detail_lamaran';
+import LayananD from './views/dashboard/layanan';
+import Admin from './views/dashboard/admin';
+import Pengguna from './views/dashboard/pengguna';
+import Galery from './views/dashboard/galery';
+import SlideShow from './views/dashboard/slideshow';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -67,37 +80,37 @@ root.render(
       {/* Dashboard */}
       <Route path="/dashboard" Component={Dashboard}></Route>
 
-      {/* <Route path="/dashboard/admin" Component={Admin}></Route> */}
+      <Route path="/dashboard/admin" Component={Admin}></Route>
 
-      {/* <Route path="/dashboard/pengguna" Component={Pengguna}></Route> */}
+      <Route path="/dashboard/pengguna" Component={Pengguna}></Route>
 
-      {/* <Route path="dashboard/slide-show" Component={SlideShow}></Route> */}
-      {/* <Route path="dashboard/galery" Component={Galery}></Route> */}
+      <Route path="dashboard/slide-show" Component={SlideShow}></Route>
+      <Route path="dashboard/galery" Component={Galery}></Route>
 
-      {/* <Route path="dashboard/layanan" Component={Layanan}></Route> */}
+      <Route path="dashboard/layanan" Component={LayananD}></Route>
 
       <Route path="/dashboard/loker" Component={LokerD}></Route>
       <Route path="/dashboard/loker/detail/:loker_id" Component={DetaiLokerD}></Route>
       <Route path="/dashboard/loker/tambah-data" Component={CreateInfoLoker}></Route>
 
-      {/* <Route path="/dashboard/lamaran" Component={Lamaran}></Route> */}
-      {/* <Route path="/dashboard/lamaran/detail/:lamaran_id" Component={DetailLamaran}></Route> */}
+      <Route path="/dashboard/lamaran" Component={LamaranD}></Route>
+      <Route path="/dashboard/lamaran/detail/:lamaran_id" Component={DetailLamaranD}></Route>
 
       <Route path="/dashboard/magang" Component={MagangD}></Route>
       <Route path="/dashboard/magang/detail/:magang_id" Component={DetailMagangD}></Route>
-      {/* <Route path="/dashboard/magang/add" Component={CreateInfoMagang}></Route> */}
+      <Route path="/dashboard/magang/add" Component={CreateInfoMagang}></Route>
 
       <Route path="/dashboard/pelatihan" Component={PelatihanD}></Route>
       <Route path="/dashboard/pelatihan/detail/:pelatihan_id" Component={DetailPelatihanD}></Route>
-      {/* <Route path="/dashboard/pelatihan/add" Component={CreateInfoPelatihan}></Route> */}
+      <Route path="/dashboard/pelatihan/add" Component={CreateInfoPelatihan}></Route>
 
       <Route path="/dashboard/sertifikasi" Component={SertifikasiD}></Route>
       <Route path="/dashboard/sertifikasi/detail/:sertifikasi_id" Component={DetailSertifikasiD}></Route>
-      {/* <Route path="/dashboard/sertifikasi/add" Component={CreateInfoSertifikasi}></Route> */}
+      <Route path="/dashboard/sertifikasi/add" Component={CreateInfoSertifikasi}></Route>
 
-      {/*<Route path="/dashboard/workshop" Component={Workshop}></Route>
+      <Route path="/dashboard/workshop" Component={WorkshopD}></Route>
+      <Route path="/dashboard/workshop/detail/:workshop_id" Component={DetailWorkshopD}></Route>
       <Route path="/dashboard/workshop/add" Component={CreateInfoWorkshop}></Route>
-      <Route path="/dashboard/workshop/detail/:workshop_id" Component={DetailWorkshop}></Route>*/}
 
 
       <Route path="/dashboard/pengaturan" Component={PengaturanD}></Route>

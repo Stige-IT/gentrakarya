@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import ListLamaranMasyarakat from "./views/list_lamaran"
 import ListLamaranLembaga from "./views/list_lamaran_lembaga"
 
-const Lamaran = () => {
+const LamaranD = () => {
     let [number, setNumber] = useState(1)
     const navigate = useNavigate()
     const [view, setView] = useState(null);
@@ -43,4 +43,4 @@ const Lamaran = () => {
     )
 }
 
-export default Lamaran
+export default LamaranD

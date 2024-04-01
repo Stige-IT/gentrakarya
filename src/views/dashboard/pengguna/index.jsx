@@ -1,14 +1,5 @@
 import { Helmet } from "react-helmet"
-import Layout from "../../../components/dashboard_component/layout"
-import Header from "../../../components/dashboard_component/header"
 import { useEffect, useState } from "react"
-import {
-    Modal,
-    Ripple,
-    Dropdown,
-    initTE,
-} from "tw-elements";
-import TemplateInput from "../../../components/template_input";
 import { deletePengguna, getPengguna, searchPengguna } from "../../../services/pengguna_service";
 import { useNavigate } from "react-router-dom";
 import { getGender } from "../../../services/gender_service";
@@ -17,6 +8,8 @@ import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { BaseURL } from "../../../services/base_url";
 import { initials } from "../../../services/initial";
 import { useRef } from "react";
+import Layout from "../../../components/layout";
+import Header from "../../../components/header";
 
 const Pengguna = () => {
     const modalAddRef = useRef(null);
@@ -78,8 +71,6 @@ const Pengguna = () => {
             })
 
         }
-
-        initTE({ Modal, Ripple, Dropdown });
 
     }, [navigate, accessToken, currentPage])
 

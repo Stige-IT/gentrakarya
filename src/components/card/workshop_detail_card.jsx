@@ -11,8 +11,9 @@ import {
 } from "../../services/image_workshop_service";
 import TemplateText from "../template_text";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { BaseURL } from "../../services/base_url";
+import SpinnerWave from "../spinner/spinner_wave";
 
 const WorkshopDetailCard = ({ workshop_id, category }) => {
   const path = useHref();
@@ -206,26 +207,146 @@ const WorkshopDetailCard = ({ workshop_id, category }) => {
         />
       </div>
 
-      {imageGalery?.length !== 0 ? (
+      {imageGalery.length === 0 && category !== "lembaga" ? (
+        ""
+      ) : (
         <div className="w-full mt-5">
           <div className="flex items-center justify-between bg-gray-300 py-2 px-3 mb-3">
-            <p className="font-semibold ">Galeri Workshop :</p>
+            <p className="font-semibold ">Galeri Loker :</p>
+            {category === "lembaga" ? (
+              <>
+                {/* Modal Add Galery */}
+                <button
+                  onClick={() => setOpenModalAddGalery(true)}
+                  className="px-3 py-2 bg-custom-yellow rounded-md flex items-center font-semibold space-x-3 "
+                >
+                  <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+                  <p>Tambah Galery</p>
+                </button>
+              </>
+            ) : (
+              ""
+            )}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {imageGalery?.map((item) => (
               <div className="w-full aspect-video bg-gray-300 rounded-md overflow-hidden relative object-center group">
-                <img
-                  src={BaseURL + item?.image}
-                  alt={item?.image}
-                  className="w-full aspect-video object-center object-contain"
-                />
+                {loading === true ? (
+                  <div className="w-full aspect-video object-center object-contain bg-gray-300 animate-pulse flex items-center justify-center">
+                    <SpinnerWave></SpinnerWave>
+                  </div>
+                ) : (
+                  <img
+                    src={BaseURL + item?.image}
+                    alt={item?.image}
+                    className="w-full aspect-video object-center object-contain"
+                  />
+                )}
+                {category === "lembaga" ? (
+                  <button
+                    type="button"
+                    onClick={(e) => handleDeleteImage(e, item?.id)}
+                    className="w-full absolute bottom-0 h-0 z-0 group-hover:h-10 flex items-center justify-center font-serif bg-red-500 text-white hover:bg-red-600 transition-all duration-300"
+                  >
+                    Hapus
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
             ))}
           </div>
         </div>
-      ) : (
-        ""
       )}
+
+      {/* Modal Confirm */}
+      <input
+        className="modal-state scale-0"
+        id="modal-1"
+        type="checkbox"
+        checked={checked}
+      />
+      <div className="modal">
+        <label className="modal-overlay" htmlFor="modal-1"></label>
+        <div className="modal-content flex flex-col gap-5">
+          <svg
+            // width="40"
+            // height="35"
+            viewBox="0 0 40 35"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="mx-auto w-32 aspect-square object-contain"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M4.94024 35.0004H35.0602C38.1402 35.0004 40.0602 31.6604 38.5202 29.0004L23.4602 2.98035C21.9202 0.320352 18.0802 0.320352 16.5402 2.98035L1.48024 29.0004C-0.0597576 31.6604 1.86024 35.0004 4.94024 35.0004ZM20.0002 21.0004C18.9002 21.0004 18.0002 20.1004 18.0002 19.0004V15.0004C18.0002 13.9004 18.9002 13.0004 20.0002 13.0004C21.1002 13.0004 22.0002 13.9004 22.0002 15.0004V19.0004C22.0002 20.1004 21.1002 21.0004 20.0002 21.0004ZM22.0002 29.0004H18.0002V25.0004H22.0002V29.0004Z"
+              fill="#F98600"
+            />
+          </svg>
+          <span className="text-center">{messageConfirm}</span>
+          <div className="flex gap-3 mt-5">
+            <button
+              onClick={() => setChecked(false)}
+              className="btn btn-error btn-block"
+            >
+              Kembali
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal add Galery */}
+      <input
+        className="modal-state scale-0"
+        id="modal-1"
+        type="checkbox"
+        checked={openModalAddGalery}
+      />
+      <div className="modal">
+        <div className="modal-content w-[80%] max-w-[500px] space-y-3">
+          <h2 className="text-xl">Tambah Image Galery</h2>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleImageChange}
+              className="input-file input-file-primary"
+            />
+            <div className="flex items-center flex-wrap w-full">
+              {images.map((image, index) => (
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt={`image-${index}`}
+                  className="w-32 aspect-video object-contain bg-slate-300 rounded-md m-1"
+                />
+              ))}
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setOpenModalAddGalery(false);
+                  setImages([]);
+                }}
+                className="btn btn-error btn-block"
+              >
+                Kembali
+              </button>
+              {loading === true ? (
+                <div className="w-1/2">
+                  <SpinnerWave />
+                </div>
+              ) : (
+                <button type="submit" className="btn btn-primary btn-block">
+                  <p>Simpan</p>
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

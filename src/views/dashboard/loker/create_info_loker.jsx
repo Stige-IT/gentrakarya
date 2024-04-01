@@ -10,7 +10,8 @@ import {
   getRegency,
   getVillage,
 } from "../../../services/location_service";
-import ReactQuill from "react-quill";
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
 import TemplateInputV2 from "../../../components/template_input_v2";
 import { postLoker } from "../../../services/loker_service";
 import { getJenjangPendidikan } from "../../../services/jenjang_pendidikan_service";
@@ -137,11 +138,11 @@ const CreateInfoLoker = () => {
     } else {
       setAccessToken(`Bearer ${newAccessToken}`);
 
-      fetchDataProfileLembaga(newAccessToken);
+      fetchDataProfileLembaga(`Bearer${newAccessToken}`);
 
       fetchDataProvince();
-      fetchDataRegency(regencyId);
-      fetchDataDistrict(villageId);
+      fetchDataRegency(provinceId);
+            fetchDataDistrict(regencyId);
       fetchDataVillage(districtId);
 
       fetchDataJenjangPendidikan();
