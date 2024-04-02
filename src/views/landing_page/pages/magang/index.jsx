@@ -196,13 +196,13 @@ const Magang = () => {
       <Helmet>
         <title>Magang - Gentra Karya</title>
       </Helmet>
-      <div className="w-full h-screen overflow-auto">
+      <div className="w-full h-screen overflow-auto bg-white">
         <Navbar></Navbar>
         <div className="sticky top-16 h-14 flex items-center justify-between px-10 text-sm border-b-2 bg-blue-300 space-x-3">
           <div className="flex items-center space-x-3">
             <FontAwesomeIcon
               icon={faBell}
-              className="h-8 aspect-square text-custom-dark"
+              className="h-8 aspect-square text-black"
             ></FontAwesomeIcon>
             <p className="text-base md:text-2xl font-semibold">
               Informasi Magang Gantra Karya

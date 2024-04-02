@@ -59,9 +59,9 @@ export const showMagangGeneral = async (magangId) => {
     }
 };
 
-export const getMagang = async (accessToken) => {
+export const getMagang = async (accessToken, page) => {
     try {
-        const response = await apiService.get(`lembaga/magang`, {
+        const response = await apiService.get(`lembaga/magang?page=${page}`, {
             headers: {
                 Authorization: accessToken,
                 'Content-Type': 'application/json'

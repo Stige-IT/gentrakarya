@@ -46,9 +46,9 @@ export const searchPelatihanGeneral = async (keyword) => {
     }
 };
 
-export const getPelatihan = async (accessToken) => {
+export const getPelatihan = async (accessToken, page) => {
     try {
-        const response = await apiService.get(`lembaga/pelatihan`, {
+        const response = await apiService.get(`lembaga/pelatihan?page=${page}`, {
             headers: {
                 Authorization: accessToken,
                 'Content-Type': 'application/json'

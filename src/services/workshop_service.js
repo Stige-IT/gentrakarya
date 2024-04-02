@@ -42,9 +42,9 @@ export const searchWorkshopGeneral = async (keyword) => {
         return error.response
     }
 };
-export const getWorkshop = async (accessToken) => {
+export const getWorkshop = async (accessToken, page) => {
     try {
-        const response = await apiService.get(`lembaga/workshop`, {
+        const response = await apiService.get(`lembaga/workshop?page=${page}`, {
             headers: {
                 Authorization: accessToken,
                 'Content-Type': 'application/json'

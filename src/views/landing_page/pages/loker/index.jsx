@@ -216,13 +216,13 @@ const Loker = () => {
       <Helmet>
         <title>Lowongan Pekerjaan</title>
       </Helmet>
-      <div className="h-screen w-full overflow-auto ">
+      <div className="h-screen w-full overflow-auto bg-white ">
         <Navbar></Navbar>
         <div className="h-14 flex items-center justify-between px-10 text-sm border-b-2 bg-blue-300 space-x-3">
           <div className="flex items-center space-x-3">
             <FontAwesomeIcon
               icon={faBell}
-              className="h-8 aspect-square text-custom-dark"
+              className="h-8 aspect-square text-black"
             ></FontAwesomeIcon>
             <p className="text-base md:text-2xl font-semibold">
               Informasi Lowongan Pekerjaan - Gantra Karya

@@ -108,7 +108,7 @@ const Navbar = () => {
               to="/"
               className="font-semibold hover:bg-gray-200 transition-all cursor-pointer text-center py-2"
             >
-              Vii & Misi
+              Visi & Misi
             </Link>
           ) : (
             <a

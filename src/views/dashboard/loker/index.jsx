@@ -14,6 +14,7 @@ import SpinnerDotCircle from "../../../components/spinner/spinner_dot_circle";
 const LokerD = () => {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState("");
+  const [registrationCategory, setRegistrationCategory] = useState("");
 
   const [data, setData] = useState([]); // Data yang akan ditampilkan
   const [totalData, setTotalData] = useState(0);
@@ -46,11 +47,16 @@ const LokerD = () => {
 
   useEffect(() => {
     const newAccessToken = localStorage.getItem("access_token");
+    const getRegistrationCategory = localStorage.getItem(
+      "registration_category"
+    );
 
     if (newAccessToken === null || newAccessToken === "") {
       navigate("/login");
     } else {
       setAccessToken(`Bearer ${newAccessToken}`);
+      setRegistrationCategory(getRegistrationCategory);
+
       fetchDataLoker(`Bearer ${newAccessToken}`);
     }
   }, [navigate]);
@@ -65,16 +71,20 @@ const LokerD = () => {
             <span>Lowongan Pekerjaan</span>
             <span>{loading === true ? <SpinnerDotCircle /> : totalData}</span>
           </div>
-          <Link
-            to="/dashboard/loker/tambah-data"
-            className="space-x-3 flex items-center px-3 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 text-sm tracking-wide"
-          >
-            <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-            <p>Tambah Data</p>
-          </Link>
+          {registrationCategory === "LEMBAGA" ? (
+            <Link
+              to="/dashboard/loker/tambah-data"
+              className="space-x-3 flex items-center px-3 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 text-sm tracking-wide"
+            >
+              <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+              <p>Tambah Data</p>
+            </Link>
+          ) : (
+            ""
+          )}
         </Header>
-        <div className="grid grid-cols-3 gap-5 p-5">
-          {loading === true ? (
+      <div className="grid grid-cols-3 gap-5 p-5">
+            {loading === true ? (
             <>
               {Array.from({ length: 3 }, (_, index) => (
                 <LokerLoadingCard></LokerLoadingCard>
@@ -103,24 +113,28 @@ const LokerD = () => {
           )}
         </div>
 
-        <div className="flex justify-center items-center mt-4 mb-10">
-          <ReactPaginate
-            activePage={currentPage}
-            itemsCountPerPage={20} // Jumlah item per halaman
-            totalItemsCount={lastPage} // Jumlah total item
-            pageRangeDisplayed={5} // Jumlah halaman yang ditampilkan di sekitar halaman saat ini
-            onChange={handlePageChange}
-            itemClass="relative inline-block px-2 py-2 leading-5 text-gray-700 bg-white border border-gray-300 cursor-pointer hover:bg-gray-100 rounded-full"
-            linkClass="text-sm"
-            activeClass="bg-indigo-500 text-white"
-            activeLinkClass="bg-indigo-500 text-white"
-            firstPageText="Pertama"
-            lastPageText="Terakhir"
-            prevPageText="Sebelumnya"
-            nextPageText="Selanjutnya"
-            innerClass="flex"
-          />
-        </div>
+        {data.length === 0 ? (
+          ""
+        ) : (
+          <div className="flex justify-center items-center mt-4 mb-10">
+            <ReactPaginate
+              activePage={currentPage}
+              itemsCountPerPage={20} // Jumlah item per halaman
+              totalItemsCount={lastPage} // Jumlah total item
+              pageRangeDisplayed={5} // Jumlah halaman yang ditampilkan di sekitar halaman saat ini
+              onChange={handlePageChange}
+              itemClass="relative inline-block px-2 py-2 leading-5 text-gray-700 bg-white border border-gray-300 cursor-pointer hover:bg-gray-100 rounded-full"
+              linkClass="text-sm"
+              activeClass="bg-indigo-500 text-white"
+              activeLinkClass="bg-indigo-500 text-white"
+              firstPageText="Pertama"
+              lastPageText="Terakhir"
+              prevPageText="Sebelumnya"
+              nextPageText="Selanjutnya"
+              innerClass="flex"
+            />
+          </div>
+        )}
       </Layout>
     </>
   );

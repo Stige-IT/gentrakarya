@@ -213,7 +213,7 @@ const Sertifikasi = () => {
           <div className="flex items-center space-x-3">
             <FontAwesomeIcon
               icon={faBell}
-              className="h-8 aspect-square text-custom-dark"
+              className="h-8 aspect-square text-black"
             ></FontAwesomeIcon>
             <p className="text-base md:text-2xl font-semibold">
               Informasi Sertifikasi Gantra Karya

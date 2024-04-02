@@ -8,10 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import SertifikasiLoadingCard from "../../../components/card/sertifikasi_loading_card";
 import { Link, useNavigate } from "react-router-dom";
+import ReactPaginate from "react-js-pagination";
 
 const SertifikasiD = () => {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState("");
+  const [registrationCategory, setRegistrationCategory] = useState("");
 
   const [data, setData] = useState([]); // Data yang akan ditampilkan
   const [totalData, setTotalData] = useState(0);
@@ -19,9 +21,9 @@ const SertifikasiD = () => {
   const [lastPage, setLastPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const fetchDataSertifikasi = async (accessToken) => {
+  const fetchDataSertifikasi = async (accessToken, page) => {
     try {
-      const response = await getSertifikasi(accessToken);
+      const response = await getSertifikasi(accessToken, page);
       setData(response.data.data);
       setTotalData(response.data.meta.total);
     } catch (error) {
@@ -33,14 +35,27 @@ const SertifikasiD = () => {
 
   useEffect(() => {
     const newAccessToken = localStorage.getItem("access_token");
+    const getRegistrationCategory = localStorage.getItem(
+      "registration_category"
+    );
+
     if (newAccessToken === null || newAccessToken === "") {
       navigate("/login");
     } else {
       setLoading(true)
       setAccessToken(`Bearer ${newAccessToken}`);
-      fetchDataSertifikasi(`Bearer ${newAccessToken}`);
+      setRegistrationCategory(getRegistrationCategory);
+
+      fetchDataSertifikasi(`Bearer ${newAccessToken}`, currentPage);
     }
   }, [navigate]);
+
+  const handlePageChange = (currentPage) => {
+    console.log(`active page is ${currentPage}`);
+    setCurrentPage(currentPage);
+    fetchDataSertifikasi(accessToken, currentPage);
+  };
+
   return (
     <>
       <Helmet>
@@ -54,13 +69,16 @@ const SertifikasiD = () => {
               ({totalData} Sertifikasi)
             </span>
           </p>
+
+          {registrationCategory === "LEMBAGA" ? (
           <Link
             to="/dashboard/sertifikasi/add"
             className="flex items-center space-x-3 bg-blue-500 hover:bg-blue-600 transition-colors rounded-md px-3 py-2 text-white"
           >
             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
             <p className="hidden md:block">Tambah Info Sertifikasi</p>
-          </Link>
+          </Link>) : ""
+}
         </Header>
         <div className="w-full grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-3 py-3 px-3 md:px-5 lg:px-10">
           {loading === true ? (
@@ -87,6 +105,29 @@ const SertifikasiD = () => {
             </>
           )}
         </div>
+
+        {data.length === 0 ? (
+          ""
+        ) : (
+          <div className="flex justify-center items-center mt-4 mb-10">
+            <ReactPaginate
+              activePage={currentPage}
+              itemsCountPerPage={20} // Jumlah item per halaman
+              totalItemsCount={lastPage} // Jumlah total item
+              pageRangeDisplayed={5} // Jumlah halaman yang ditampilkan di sekitar halaman saat ini
+              onChange={handlePageChange}
+              itemClass="relative inline-block px-2 py-2 leading-5 text-gray-700 bg-white border border-gray-300 cursor-pointer hover:bg-gray-100 rounded-full"
+              linkClass="text-sm"
+              activeClass="bg-indigo-500 text-white"
+              activeLinkClass="bg-indigo-500 text-white"
+              firstPageText="Pertama"
+              lastPageText="Terakhir"
+              prevPageText="Sebelumnya"
+              nextPageText="Selanjutnya"
+              innerClass="flex"
+            />
+          </div>
+        )}
       </Layout>
     </>
   );
