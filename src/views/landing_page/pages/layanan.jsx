@@ -25,10 +25,10 @@ const Layanan = () => {
       <Helmet>
         <title>Layanan - Gentra Karya</title>
       </Helmet>
-      <div className="w-full h-screen overflow-auto bg-white text-black">
+      <div className="w-full h-screen overflow-auto bg-white">
         <Navbar></Navbar>
         <div className="mt-20 md:mt-10 w-full pb-10 px-3 lg:px-20">
-          <div className="accordion-group">
+          <div className="accordion-group bg-blue-800">
             {layanan?.map((item, index) => (
               <div className="accordion">
                 <input
@@ -38,7 +38,7 @@ const Layanan = () => {
                 />
                 <label
                   htmlFor={`accordion-${index}`}
-                  className="accordion-title text-sm md:text-base"
+                  className="accordion-title text-sm md:text-base bg-white text-black"
                 >
                   {item?.name}
                 </label>
