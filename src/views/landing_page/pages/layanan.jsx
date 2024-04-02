@@ -28,7 +28,7 @@ const Layanan = () => {
       <div className="w-full h-screen overflow-auto bg-white">
         <Navbar></Navbar>
         <div className="mt-20 md:mt-10 w-full pb-10 px-3 lg:px-20">
-          <div className="accordion-group bg-blue-800">
+          <div className="accordion-group ">
             {layanan?.map((item, index) => (
               <div className="accordion">
                 <input
