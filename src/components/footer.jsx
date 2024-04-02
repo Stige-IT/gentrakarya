@@ -11,7 +11,7 @@ const Footer = () => {
         alt="Wave Footer"
         className="w-full object-cover "
       />
-      <div id="footer" className="w-full bg-custom-dark">
+      <div id="footer" className="w-full bg-gray-900">
         <div className="w-full grid grid-cols-1 md:grid-cols-5 px-5 lg:px-10 gap-5 lg:gap-0">
           <div className="lg:aspect-square px-3">
             <img

@@ -5,7 +5,7 @@ import FormatDateTime from '../format_datetime'
 
 const SertifikasiCard = ({ link, tanggalPelaksanaan, posisi, namaPerusahaan, lembaga, biaya, metoda, dibuatTanggal, }) => {
     return (
-        <div className="w-full drop-shadow-2xl shadow-gray-300 shadow-md rounded-xl border-2 hover:border-custom-yellow transition-colors p-3">
+        <div className="w-full drop-shadow-2xl shadow-gray-300 shadow-md rounded-xl border-2 hover:border-custom-yellow transition-colors p-3 bg-white text-black">
             <div className="flex items-center justify-between border-b-2 border-black pb-3 mb-3">
                 <img src={LogoGentra} alt="Logo Gentra Karya v2" className='h-14 object-contain' />
                 <img src={Logo} alt="Logo Gentra Karya v1" className='h-12 object-contain' />
