@@ -218,7 +218,7 @@ const Loker = () => {
       </Helmet>
       <div className="h-screen w-full overflow-auto bg-white ">
         <Navbar></Navbar>
-        <div className="h-14 flex items-center justify-between px-10 text-sm border-b-2 bg-blue-300 space-x-3">
+        <div className="h-14 flex items-center justify-between px-10 text-sm border-b-2 bg-blue-300 space-x-3 text-black">
           <div className="flex items-center space-x-3">
             <FontAwesomeIcon
               icon={faBell}
@@ -238,7 +238,8 @@ const Loker = () => {
             </div>
           )}
         </div>
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  px-5 lg:px-10 text-sm mt-5 border-b-2 pb-3 border-black space-y-3 lg:space-y-0">
+
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  px-5 lg:px-10 text-sm mt-5 border-b-2 pb-3 border-black space-y-3 lg:space-y-0 text-black">
           {/* Search */}
           <div class="flex items-center space-x-3 w-full">
             <form action="" onSubmit={handleSearch} className="w-full lg:w-fit">

@@ -25,7 +25,7 @@ const Layanan = () => {
       <Helmet>
         <title>Layanan - Gentra Karya</title>
       </Helmet>
-      <div className="w-full h-screen overflow-auto bg-white">
+      <div className="w-full h-screen overflow-auto bg-white text-black">
         <Navbar></Navbar>
         <div className="mt-20 md:mt-10 w-full pb-10 px-3 lg:px-20">
           <div className="accordion-group">

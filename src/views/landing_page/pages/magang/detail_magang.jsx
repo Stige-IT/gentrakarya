@@ -23,7 +23,7 @@ const DetailMagang = () => {
       <Helmet>
         <title>Detail Magang - Gentra Karya</title>
       </Helmet>
-      <div className="h-screen w-full bg-white overflow-auto scrollbar-thin scrollbar-track-rounded-full  scrollbar-thumb-rounded-full scrollbar-thumb-yellow-400">
+      <div className="h-screen w-full bg-white overflow-auto scrollbar-thin scrollbar-track-rounded-full  scrollbar-thumb-rounded-full scrollbar-thumb-yellow-400 text-black">
         <Navbar></Navbar>
         <div className="sticky top-16 h-14 flex items-center px-10 text-sm border-b-2 bg-blue-300 space-x-3">
           <FontAwesomeIcon

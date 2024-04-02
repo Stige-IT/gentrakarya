@@ -2,7 +2,7 @@ import Icon from "../../../assets/images/icon 2.svg";
 
 const VisiMisi = () => {
   return (
-    <div className="  md:w-[80%] md:h-96 mx-auto my-10">
+    <div className="  md:w-[80%] md:h-96 mx-auto my-10 bg-white">
       <div
         id="visiMisiSection"
         className="py-46 bg-custom-yellow rounded-xl lg:mx-auto px-10 py-10 text-center relative text-black"

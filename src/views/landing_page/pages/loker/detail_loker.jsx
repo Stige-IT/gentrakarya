@@ -11,7 +11,7 @@ const DetailLoker = () => {
       <Helmet>
         <title>Detail Loker - Gentra Karya</title>
       </Helmet>
-      <div className="h-screen w-full overflow-auto">
+      <div className="h-screen w-full overflow-auto bg-white text-black">
         <Navbar></Navbar>
         <LokerDetailCard loker_id={loker_id} category="masyarakat"></LokerDetailCard>
       </div>
