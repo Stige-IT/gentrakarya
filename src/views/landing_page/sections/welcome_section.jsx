@@ -22,7 +22,7 @@ const WelcomeSection = () => {
         className="w-full mx-auto h-screen bg-cover text-white md:-mt-16 relative"
         style={{ backgroundImage: `url(${Backgound})` }}
       >
-        <div className="h-full bg-gradient-to-b lg:bg-gradient-to-r from-custom-blue/75 to-black lg:from-custom-dark/90 lg:to-custom-blue/75 flex flex-col lg:flex-row items-center justify-center relative px-5 lg:px-0">
+        <div className="h-full bg-gradient-to-b lg:bg-gradient-to-r from-custom-blue/75 to-black lg:from-black/90 lg:to-custom-blue/75 flex flex-col lg:flex-row items-center justify-center relative px-5 lg:px-0">
           <div className="lg:w-[65%] lg:pl-24 text-center lg:text-start order-2 lg:order-1">
             <h1 className="text-4xl lg:text-7xl font-semibold">Gentra Karya</h1>
             <h2 className="text-sm lg:text-xl mt-3 lg:mt-0 tracking-wide">
