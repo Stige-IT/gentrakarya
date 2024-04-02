@@ -196,7 +196,7 @@ const Loker = () => {
     });
   };
 
-  useEffect( () => {
+  useEffect(() => {
     setLoading(true);
     getProvince().then((response) => {
       if (response && response.status === 200) {
@@ -205,7 +205,7 @@ const Loker = () => {
         setProvince([]);
       }
       setProvinceId(0);
-    })
+    });
 
     fetchDataLokerGeneral();
 
@@ -218,7 +218,7 @@ const Loker = () => {
       </Helmet>
       <div className="h-screen w-full overflow-auto bg-white ">
         <Navbar></Navbar>
-        <div className="h-14 flex items-center justify-between px-10 text-sm border-b-2 bg-blue-300 space-x-3 text-black">
+        <div className="sticky top-16 z-10 h-14 flex items-center justify-between px-10 text-sm border-b-2 bg-blue-300 space-x-3">
           <div className="flex items-center space-x-3">
             <FontAwesomeIcon
               icon={faBell}
@@ -233,13 +233,17 @@ const Loker = () => {
             <SpinnerDotCircle></SpinnerDotCircle>
           ) : (
             <div className="flex items-center space-x-2 font-semibold">
-              <p className="text-2xl">{totalData}</p>
-              <p className="text-base">Total Loker</p>
+              <p className="text-2xl">
+                <span className="md:hidden">(</span>
+                <span>{totalData}</span>
+                <span className="md:hidden">)</span>
+              </p>
+              <p className="hidden md:block text-base">Total Magang</p>
             </div>
           )}
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  px-5 lg:px-10 text-sm mt-5 border-b-2 pb-3 border-black space-y-3 lg:space-y-0 text-black">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  px-5 lg:px-10 text-sm mt-20 lg:mt-5 border-b-2 pb-3 border-black space-y-3 lg:space-y-0">
           {/* Search */}
           <div class="flex items-center space-x-3 w-full">
             <form action="" onSubmit={handleSearch} className="w-full lg:w-fit">
