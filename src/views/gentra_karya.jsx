@@ -6,9 +6,11 @@ const GentraKarya = () => {
   const navigate = useNavigate()
   useEffect(() => {
     console.log(path);
-    if (path === "/gentra_karya" || path === "gentra_karya") {
+    if (path === "/gentra_karya" || path === "gentra_karya" || path === "/gentra_karya/" || path === "gentrakarya.disnakertrans.garutkab.go.id/gentra_karya/" || path === "gentrakarya.disnakertrans.garutkab.go.id/gentra_karya") {
         navigate('/')
     }
+
+    console.log(window.location);
   }, [path]);
   return <></>;
 };
