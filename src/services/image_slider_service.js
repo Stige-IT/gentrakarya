@@ -13,15 +13,16 @@ export const getImageslider = async () => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
-export const postImageSlider = async (accessToken, image,) => {
+export const postImageSlider = async (accessToken, images,) => {
     try {
 
         const formData = new FormData();
-        formData.append('images[]', image);
+        for (const image of images) {
+            formData.append('images[]', image);
+        }
         
 
         const response = await apiService.post(`super-admin/image/slider/create`, formData, {
@@ -34,7 +35,6 @@ export const postImageSlider = async (accessToken, image,) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };
 
@@ -50,6 +50,5 @@ export const deleteImageSlider = async (accessToken, imageId,) => {
         return response
     } catch (error) {
         return error.response
-        console.error('Error fetching data:', error);
     }
 };

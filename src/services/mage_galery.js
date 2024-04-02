@@ -32,11 +32,13 @@ export const getImagGalery = async () => {
     }
 };
 
-export const postImageGalery = async (accessToken, image,) => {
+export const postImageGalery = async (accessToken, images,) => {
     try {
 
         const formData = new FormData();
-        formData.append('images[]', image);
+        for (const image of images) {
+            formData.append('images[]', image);
+        }
         
 
         const response = await apiService.post(`super-admin/image/galery/create`, formData, {
