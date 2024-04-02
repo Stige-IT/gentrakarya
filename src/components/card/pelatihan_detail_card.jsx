@@ -103,7 +103,7 @@ const PelatihanDetailCard = ({ pelatihan_id, category }) => {
   };
 
   return (
-    <div className="w-full px-3 md:px-5 lg:px-10 py-5">
+    <div className="w-full px-3 md:px-5 lg:px-10 py-5 mt-16 md:mt-0">
       <p className="text-2xl font-semibold text-center uppercase bg-blue-300 py-2">
         {data?.judul_pelatihan}
       </p>

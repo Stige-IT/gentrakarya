@@ -67,7 +67,7 @@ const Navbar = () => {
         </div>
 
         {/* Center */}
-        <div className="hidden md:flex items-center space-x-3">
+        <div className="hidden lg:flex items-center space-x-3">
           {currentLink !== "/" ? (
             <Link
               to="/"
@@ -224,7 +224,7 @@ const Navbar = () => {
           <button
             type="button"
             onClick={handleOpenMenu}
-            className="flex items-center justify-center relative p-2 h-8 aspect-square md:hidden"
+            className="flex items-center justify-center relative p-2 h-8 aspect-square lg:hidden"
           >
             <FontAwesomeIcon
               className={`${

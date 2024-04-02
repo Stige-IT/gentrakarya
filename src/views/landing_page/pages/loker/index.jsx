@@ -243,7 +243,7 @@ const Loker = () => {
           )}
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  px-5 lg:px-10 text-sm mt-20 lg:mt-5 border-b-2 pb-3 border-black space-y-3 lg:space-y-0">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  px-5 lg:px-10 text-sm mt-20 md:mt-5 border-b-2 pb-3 border-black space-y-3 lg:space-y-0">
           {/* Search */}
           <div class="flex items-center space-x-3 w-full">
             <form action="" onSubmit={handleSearch} className="w-full lg:w-fit">
