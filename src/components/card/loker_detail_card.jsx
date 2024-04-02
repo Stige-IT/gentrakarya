@@ -263,7 +263,7 @@ const LokerDetailCard = ({ loker_id, category }) => {
       </div>
 
       <div className="w-full mt-5 pb-10">
-        <p className="border-b-2 font-semibold">Deskripsi Magang :</p>
+        <p className="border-b-2 font-semibold">Deskripsi Pekerjaan :</p>
         <div
           dangerouslySetInnerHTML={{
             __html: addListClass(data?.detail ?? ""),
@@ -330,9 +330,9 @@ const LokerDetailCard = ({ loker_id, category }) => {
         type="checkbox"
         checked={checked}
       />
-      <div className="modal">
+      <div className="modal ">
         <label className="modal-overlay" htmlFor="modal-1"></label>
-        <div className="modal-content flex flex-col gap-5">
+        <div className="modal-content flex flex-col gap-5 bg-white">
           <svg
             // width="40"
             // height="35"
@@ -348,11 +348,11 @@ const LokerDetailCard = ({ loker_id, category }) => {
               fill="#F98600"
             />
           </svg>
-          <span className="text-center">{messageConfirm}</span>
+          <span className="text-center text-black">{messageConfirm}</span>
           <div className="flex gap-3 mt-5">
             <button
               onClick={() => setChecked(false)}
-              className="btn btn-error btn-block"
+              className="btn btn-error btn-block text-white"
             >
               Kembali
             </button>

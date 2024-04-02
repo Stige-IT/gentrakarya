@@ -20,7 +20,7 @@ const DetailPelatihan = () => {
             className="h-8 aspect-square text-custom-dark"
           ></FontAwesomeIcon>
           <p className="text-base md:text-2xl font-semibold">
-            Detail Informasi Magang Gantra Karya
+            Detail Informasi Pelatihan Gantra Karya
           </p>
         </div>
 

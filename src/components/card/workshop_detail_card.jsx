@@ -126,12 +126,12 @@ const WorkshopDetailCard = ({ workshop_id, category }) => {
               <FormatDateTime dateTime={data?.created_at}></FormatDateTime>
             </span>
           </p>
-          <p className="space-x-2 flex">
+          {/* <p className="space-x-2 flex">
             <span className="font-semibold">Berakhir pada :</span>
             <span>
               <FormatDate date={data?.expired_at}></FormatDate>
             </span>
-          </p>
+          </p> */}
         </div>
       </div>
 

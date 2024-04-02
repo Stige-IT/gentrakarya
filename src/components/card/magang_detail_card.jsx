@@ -176,7 +176,7 @@ const MagangDetailCard = ({ magang_id, category }) => {
               <FormatDate date={data?.expired_at}></FormatDate>
             </span>
           </p>
-          {category === "dashboard-lembaga" ? (
+          {/* {category === "dashboard-lembaga" ? (
             <button
               type="button"
               onClick={handleLamaran}
@@ -186,13 +186,13 @@ const MagangDetailCard = ({ magang_id, category }) => {
             </button>
           ) : (
             ""
-          )}
-          <div className="flex items-center space-x-3 mt-3">
+          )} */}
+          {/* <div className="flex items-center space-x-3 mt-3">
             <p>Kuota Lowongan : </p>
             <p className="text-xl font-semibold">
               {data?.kuota_lowongan - data?.lamaran} dari {data?.kuota_lowongan}
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -279,7 +279,7 @@ const MagangDetailCard = ({ magang_id, category }) => {
             href="https://maps.app.goo.gl/nHfid9j8pW5rg1VF8"
             target="_blank"
             rel="noreferrer"
-            className="text-custom-yellow flex items-center"
+            className="text-custom-blue flex items-center"
           >
             <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon>
             <p>Klik Link Map</p>
