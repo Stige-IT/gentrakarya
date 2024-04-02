@@ -44,7 +44,7 @@ const Layanan = () => {
                 </label>
                 <div className="accordion-content">
                   <div className="min-h-0 px-3 md:px-5">
-                    <div className="text-sm"
+                    <div className="text-sm text-black"
                       dangerouslySetInnerHTML={{
                         __html: addListClass(item?.detail),
                       }}
