@@ -16,6 +16,7 @@ import Navbar from "../../../../components/navbar";
 import PelatihanCard from "../../../../components/card/pelatihan_card";
 import SpinnerDotCircle from "../../../../components/spinner/spinner_dot_circle";
 import PelatihanLoadingCard from "../../../../components/card/pelatihan_loading_card";
+import ReactPaginate from "react-js-pagination";
 
 const Pelatihan = () => {
   const [province, setProvince] = useState([]);
@@ -159,6 +160,28 @@ const Pelatihan = () => {
     });
   };
 
+  const fetchDataPelatihan = async (provinceId, regencyId, districtId, villageId, page) => {
+    try {
+      const response = await   getPelatihanGeneral(provinceId, regencyId, districtId, villageId, page)
+      if (response && response.status === 200) {
+        setData(response.data.data);
+        setTotalData(response.data.meta.total);
+        setCurrentPage(response.data.meta.current_page);
+        setLastPage(response.data.meta.last_page);
+      } else {
+        setData([]);
+        setTotalData(0);
+        setCurrentPage(1);
+        setLastPage(1);
+      }
+    } catch (error) {
+      setData([]);
+        setTotalData(0);
+        setCurrentPage(1);
+        setLastPage(1);
+    }
+    setLoading(false)
+  }
   useEffect(() => {
     setLoading(true);
     getProvince().then((response) => {
@@ -170,27 +193,19 @@ const Pelatihan = () => {
       setProvinceId(0);
     });
 
-    getPelatihanGeneral(provinceId, regencyId, districtId, villageId).then(
-      (response) => {
-        if (response && response.status === 200) {
-          setData(response.data.data);
-          setTotalData(response.data.meta.total);
-          setCurrentPage(response.data.meta.current_page);
-          setLastPage(response.data.meta.last_page);
-          setLoading(false);
-        } else {
-          setData([]);
-          setTotalData(0);
-          setCurrentPage(1);
-          setLastPage(1);
-          setLoading(false);
-        }
-        setLoading(false);
-      }
-    );
+    fetchDataPelatihan(provinceId, regencyId, districtId, villageId, currentPage)
 
     // elsint-disable-next-line
   }, []);
+
+  const handlePageChange = (currentPage) => {
+    console.log(`active page is ${currentPage}`);
+    // setActivePage(pageNumber);
+    setCurrentPage(currentPage);
+    // Place logic here to fetch data based on pageNumber
+
+    fetchDataPelatihan(provinceId, regencyId, districtId, villageId, currentPage)
+  };
   return (
     <>
       <Helmet>
@@ -338,6 +353,26 @@ const Pelatihan = () => {
             </>
           )}
         </div>
+
+        <div className="flex justify-center items-center mt-4 mb-10">
+          <ReactPaginate
+            activePage={currentPage}
+            itemsCountPerPage={20} // Jumlah item per halaman
+            totalItemsCount={lastPage} // Jumlah total item
+            pageRangeDisplayed={5} // Jumlah halaman yang ditampilkan di sekitar halaman saat ini
+            onChange={handlePageChange}
+            itemClass="relative inline-block px-2 py-2 leading-5 text-gray-700 bg-white border border-gray-300 cursor-pointer hover:bg-gray-100 rounded-full"
+            linkClass="text-sm"
+            activeClass="bg-indigo-500 text-white"
+            activeLinkClass="bg-indigo-500 text-white"
+            firstPageText="Pertama"
+            lastPageText="Terakhir"
+            prevPageText="Sebelumnya"
+            nextPageText="Selanjutnya"
+            innerClass="flex"
+          />
+        </div>
+
       </div>
     </>
   );

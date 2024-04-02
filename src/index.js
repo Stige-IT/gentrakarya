@@ -45,11 +45,13 @@ import Admin from './views/dashboard/admin';
 import Pengguna from './views/dashboard/pengguna';
 import Galery from './views/dashboard/galery';
 import SlideShow from './views/dashboard/slideshow';
+import GentraKarya from './views/gentra_karya';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <Routes>
+      <Route path='/gentra_karya' Component={GentraKarya}></Route>
       <Route path='/' Component={LandingPage}></Route>
       <Route path='/login' Component={Login}></Route>
       <Route path='/register' Component={Register}></Route>

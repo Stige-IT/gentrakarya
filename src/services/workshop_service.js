@@ -1,8 +1,8 @@
 import apiService from "./api_service";
 
-export const getWorkshopGeneral = async (province_id, regency_id, district_id, village_id) => {
+export const getWorkshopGeneral = async (province_id, regency_id, district_id, village_id, page) => {
     try {
-        const response = await apiService.get(`workshop?province_id=${province_id === 0 ? null : province_id}&regency_id=${regency_id === 0 ? null : regency_id}&district_id=${district_id === 0 ? null : district_id}&village_id=${village_id === 0 ? null : village_id}`, {
+        const response = await apiService.get(`workshop?province_id=${province_id === 0 ? null : province_id}&regency_id=${regency_id === 0 ? null : regency_id}&district_id=${district_id === 0 ? null : district_id}&village_id=${village_id === 0 ? null : village_id}&page=${page}`, {
             headers: {
                 // Authorization: accessToken,
                 'Content-Type': 'application/json'
