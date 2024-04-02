@@ -1,7 +1,7 @@
 const ProfileSection = () => {
     return (
         <>
-            <div id="profileSection" className="container flex flex-col justify-center text-center px-3 md:px-[5%] mx-auto h-96 relative">
+            <div id="profileSection" className="container flex flex-col justify-center text-center px-3 md:px-[5%] mx-auto h-96 relative bg-white text-black">
                 <h1 className=" mb-10 text-xl md:text-3xl lg:text-4xl font-extrabold">
                     Profil Dinas Tenaga Kerja dan Transmigrasi Kabupaten Garut
                 </h1>

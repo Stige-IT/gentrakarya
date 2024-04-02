@@ -13,7 +13,7 @@ import WelcomeSection from "./sections/welcome_section";
 const LandingPage = () => {
   return (
     <>
-      <div className="w-full h-screen overflow-auto bg-white">
+      <div className="w-full h-screen overflow-auto ">
         <Navbar></Navbar>
         <WelcomeSection></WelcomeSection>
         <ProfileSection></ProfileSection>
